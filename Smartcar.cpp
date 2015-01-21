@@ -29,18 +29,18 @@ void Smartcar::goBackward(int centimeters){} //TO-DO
 
 void Smartcar::steerFrontRight(){
 	setLeftDirectionAndSpeed(FORWARD, MAX_SPEED);
-	setRightDirectionAndSpeed(FORWARD, _defaultMotorSpeed);
+	setRightDirectionAndSpeed(FORWARD, _defaultMotorSpeed/3);
 }
 void Smartcar::steerFrontLeft(){
-	setLeftDirectionAndSpeed(FORWARD, _defaultMotorSpeed);
+	setLeftDirectionAndSpeed(FORWARD, _defaultMotorSpeed/3);
 	setRightDirectionAndSpeed(FORWARD, MAX_SPEED);
 }
 void Smartcar::steerBackRight(){
 	setLeftDirectionAndSpeed(BACKWARD, MAX_SPEED);
-	setRightDirectionAndSpeed(BACKWARD, _defaultMotorSpeed);
+	setRightDirectionAndSpeed(BACKWARD, _defaultMotorSpeed/3);
 }
 void Smartcar::steerBackLeft(){
-	setLeftDirectionAndSpeed(BACKWARD, _defaultMotorSpeed);
+	setLeftDirectionAndSpeed(BACKWARD, _defaultMotorSpeed/3);
 	setRightDirectionAndSpeed(BACKWARD, MAX_SPEED);
 }
 void Smartcar::rotateClockwise(){
