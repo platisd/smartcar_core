@@ -3,11 +3,11 @@
 #include <SoftwareSerial.h>
 
 SoftwareSerial bluetooth(50,51); // RX, TX
-// Only pins: 10, 11, 12, 13,  50, 51, 52, 53,  62, 63, 64, 65, 66, 67, 68, 69 will work for SoftwareSerial on Arduino Mega!
+// Only pins: 10, 11, 12, 13,  50, 51, 52, 53,  62, 63, 64, 65, 66, 67, 68, 69 will only work for SoftwareSerial on Arduino Mega!
 Smartcar bob;
 
 void setup() {
-bluetooth.begin(9600);
+  bluetooth.begin(9600);
 }
 
 void loop() {
@@ -47,3 +47,9 @@ void handleInput(){
     }
   }  
 }
+
+
+
+
+
+
