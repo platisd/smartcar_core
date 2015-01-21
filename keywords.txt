@@ -1,0 +1,14 @@
+Smartcar	KEYWORD1
+goForward	KEYWORD2
+goBackward	KEYWORD2
+steerFrontRight	KEYWORD2
+steerFrontLeft	KEYWORD2
+steerBackRight	KEYWORD2
+steerBackLeft	KEYWORD2
+rotateClockwise	KEYWORD2
+rotateCounterClockwise	KEYWORD2
+stop	KEYWORD2
+setLeftMotorsDirection	KEYWORD2
+setRightMotorsDirection	KEYWORD2
+setLeftMotorsSpeed	KEYWORD2
+setRightMotorsSpeed	KEYWORD2
