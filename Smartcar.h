@@ -1,5 +1,8 @@
 /*
-  Smartcar.h - A simple library for controlling the smartcar
+*	Smartcar.h - A simple library for controlling the smartcar
+*	by providing an interface to the Adafruit Motor library.
+*	Version: 0.2
+*	Author: Dimitris Platis (based on the Smartcar project by Team Pegasus)
 */
 #ifndef Smartcar_h
 #define Smartcar_h
@@ -7,8 +10,16 @@
 #include "Arduino.h"
 #include <AFMotor.h>
 
+static const short UPPER_LEFT_MOTOR_PIN = 1;
+static const short LOWER_LEFT_MOTOR_PIN = 2;
+static const short UPPER_RIGHT_MOTOR_PIN = 3;
+static const short LOWER_RIGHT_MOTOR_PIN = 4;
+
 static const int MAX_SPEED = 255;
 static const int MIN_SPEED = 0;
+static const float PULSES_PER_CENTIMETER = 4.9; //determined empirically
+
+void updateCounter();
 
 class Smartcar
 {
@@ -36,8 +47,14 @@ class Smartcar
 		void setLeftDirectionAndSpeed(int direction, int speed);
 		void setRightDirectionAndSpeed(int direction, int speed);
 		void setDefaultMotorSpeed(int speed);
+		void travelDistance(int centimeters);
+		void setInterruptPin(short pin);
+		void resetCounter();
+		void resetDistanceTravelled();
 		AF_DCMotor motorLeft1, motorLeft2, motorRight1, motorRight2;
-		short _defaultMotorSpeed;
+		unsigned short _defaultMotorSpeed, _interruptPin, _distanceTravelled;
+
+
 };
 
 #endif

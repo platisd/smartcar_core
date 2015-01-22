@@ -1,31 +1,42 @@
 /*
 *	Smartcar.h - A simple library for controlling the smartcar
 *	by providing an interface to the Adafruit Motor library.
-*	Version: 0.1
+*	Version: 0.2
+*	Author: Dimitris Platis (based on the Smartcar project by Team Pegasus)
 */
-
-#include "Arduino.h"
 #include "Smartcar.h"
-#include <AFMotor.h>
 
-Smartcar::Smartcar() : motorLeft1(1), motorLeft2(2), motorRight1(3), motorRight2(4)
+
+volatile unsigned short _pulseCounter = 0;
+
+Smartcar::Smartcar() : motorLeft1(UPPER_LEFT_MOTOR_PIN), motorLeft2(LOWER_LEFT_MOTOR_PIN), motorRight1(UPPER_RIGHT_MOTOR_PIN), motorRight2(LOWER_RIGHT_MOTOR_PIN)
 {
+
 	setDefaultMotorSpeed(200);
 	setLeftDirectionAndSpeed(RELEASE, 0);
 	setRightDirectionAndSpeed(RELEASE,0);
+	setInterruptPin(4);  // interrupt at pin 19 for arduino mega
 }
 
 void Smartcar::goForward(){
 	setLeftDirectionAndSpeed(FORWARD, _defaultMotorSpeed);
 	setRightDirectionAndSpeed(FORWARD, _defaultMotorSpeed);
 }
-void Smartcar::goForward(int centimeters){} //TO-DO
+void Smartcar::goForward(int centimeters){
+	goForward();
+	travelDistance(centimeters);
+	stop();
+}
 
 void Smartcar::goBackward(){
 	setLeftDirectionAndSpeed(BACKWARD, _defaultMotorSpeed);
 	setRightDirectionAndSpeed(BACKWARD, _defaultMotorSpeed);
 }
-void Smartcar::goBackward(int centimeters){} //TO-DO
+void Smartcar::goBackward(int centimeters){
+	goBackward();
+	travelDistance(centimeters);
+	stop();
+}
 
 void Smartcar::steerFrontRight(){
 	setLeftDirectionAndSpeed(FORWARD, MAX_SPEED);
@@ -88,4 +99,30 @@ void Smartcar::setRightDirectionAndSpeed(int direction, int speed){
 
 void Smartcar::setDefaultMotorSpeed(int speed){
 	_defaultMotorSpeed = constrain(speed, MIN_SPEED, MAX_SPEED);
+}
+
+void Smartcar::setInterruptPin(short pin){
+	_interruptPin = pin;
+}
+
+void Smartcar::travelDistance(int centimeters){
+	attachInterrupt(_interruptPin, updateCounter, RISING);
+	resetCounter();
+	resetDistanceTravelled();
+	while (centimeters > _distanceTravelled){
+		_distanceTravelled = _pulseCounter/PULSES_PER_CENTIMETER;
+	}
+	detachInterrupt(_interruptPin);
+}
+
+void updateCounter(){
+	_pulseCounter++;
+}
+
+void Smartcar::resetCounter(){
+	_pulseCounter = 0;
+}
+
+void Smartcar::resetDistanceTravelled(){
+	_distanceTravelled = 0;
 }
