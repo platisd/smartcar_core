@@ -6,16 +6,14 @@
 */
 #include "Smartcar.h"
 
-
 volatile unsigned short _pulseCounter = 0;
 
 Smartcar::Smartcar() : motorLeft1(UPPER_LEFT_MOTOR_PIN), motorLeft2(LOWER_LEFT_MOTOR_PIN), motorRight1(UPPER_RIGHT_MOTOR_PIN), motorRight2(LOWER_RIGHT_MOTOR_PIN)
 {
-
 	setDefaultMotorSpeed(200);
 	setLeftDirectionAndSpeed(RELEASE, 0);
 	setRightDirectionAndSpeed(RELEASE,0);
-	setInterruptPin(4);  // interrupt at pin 19 for arduino mega
+	setInterruptPin(4);
 }
 
 void Smartcar::goForward(){
@@ -38,19 +36,19 @@ void Smartcar::goBackward(int centimeters){
 	stop();
 }
 
-void Smartcar::steerFrontRight(){
+void Smartcar::turnFrontRight(){
 	setLeftDirectionAndSpeed(FORWARD, MAX_SPEED);
 	setRightDirectionAndSpeed(FORWARD, _defaultMotorSpeed/3);
 }
-void Smartcar::steerFrontLeft(){
+void Smartcar::turnFrontLeft(){
 	setLeftDirectionAndSpeed(FORWARD, _defaultMotorSpeed/3);
 	setRightDirectionAndSpeed(FORWARD, MAX_SPEED);
 }
-void Smartcar::steerBackRight(){
+void Smartcar::turnBackRight(){
 	setLeftDirectionAndSpeed(BACKWARD, MAX_SPEED);
 	setRightDirectionAndSpeed(BACKWARD, _defaultMotorSpeed/3);
 }
-void Smartcar::steerBackLeft(){
+void Smartcar::turnBackLeft(){
 	setLeftDirectionAndSpeed(BACKWARD, _defaultMotorSpeed/3);
 	setRightDirectionAndSpeed(BACKWARD, MAX_SPEED);
 }
@@ -58,7 +56,14 @@ void Smartcar::rotateClockwise(){
 	setLeftDirectionAndSpeed(FORWARD, MAX_SPEED);
 	setRightDirectionAndSpeed(BACKWARD, MAX_SPEED);
 }
-void Smartcar::rotateClockwise(int degrees){} //TO-DO
+void Smartcar::rotateClockwise(int degrees){ //TO-DO
+	initializeMagnetometer();
+	while ((degrees - getMagnetometerData()) < 2){
+		rotateClockwise();
+	}
+	stop();
+}
+
 
 void Smartcar::rotateCounterClockwise(){
 	setLeftDirectionAndSpeed(BACKWARD, MAX_SPEED);
@@ -126,3 +131,7 @@ void Smartcar::resetCounter(){
 void Smartcar::resetDistanceTravelled(){
 	_distanceTravelled = 0;
 }
+
+void Smartcar::initializeMagnetometer(){} //TO-DO
+
+int Smartcar::getMagnetometerData(){} //TO-DO

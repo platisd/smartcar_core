@@ -10,6 +10,7 @@
 #include "Arduino.h"
 #include <AFMotor.h>
 
+
 static const short UPPER_LEFT_MOTOR_PIN = 1;
 static const short LOWER_LEFT_MOTOR_PIN = 2;
 static const short UPPER_RIGHT_MOTOR_PIN = 3;
@@ -17,7 +18,9 @@ static const short LOWER_RIGHT_MOTOR_PIN = 4;
 
 static const int MAX_SPEED = 255;
 static const int MIN_SPEED = 0;
+
 static const float PULSES_PER_CENTIMETER = 4.9; //determined empirically
+
 
 void updateCounter();
 
@@ -29,10 +32,10 @@ class Smartcar
 		void goForward(int centimeters);
 		void goBackward();
 		void goBackward(int centimeters);
-		void steerFrontRight();
-		void steerFrontLeft();
-		void steerBackRight();
-		void steerBackLeft();
+		void turnFrontRight();
+		void turnFrontLeft();
+		void turnBackRight();
+		void turnBackLeft();
 		void rotateClockwise();
 		void rotateClockwise(int degrees);
 		void rotateCounterClockwise();
@@ -51,9 +54,10 @@ class Smartcar
 		void setInterruptPin(short pin);
 		void resetCounter();
 		void resetDistanceTravelled();
+		void initializeMagnetometer();
+		int getMagnetometerData();
 		AF_DCMotor motorLeft1, motorLeft2, motorRight1, motorRight2;
 		unsigned short _defaultMotorSpeed, _interruptPin, _distanceTravelled;
-
 
 };
 
