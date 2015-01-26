@@ -16,9 +16,10 @@ The students will provide constant feedback on the API, which will aid in the ex
 - [Adafruit motor shield library]
 
 ### Documentation
-(TBA)
+- [Wiki]
 
 [Adafruit motor shield library]:https://github.com/adafruit/Adafruit-Motor-Shield-library
+[Wiki]:/wiki
 
 ### License
 AGPL
