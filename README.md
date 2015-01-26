@@ -16,12 +16,14 @@ The students will provide constant feedback on the API, which will aid in the ex
 ### Dependencies
 - The smartcar hardware platform
 - [Adafruit motor shield library]
+- [Wire library]
 
 ### Documentation
 - [Wiki]
 
 [Adafruit motor shield library]:https://github.com/adafruit/Adafruit-Motor-Shield-library
 [Wiki]:https://github.com/platisd/smartcar_core/wiki
+[Wire library]:http://arduino.cc/en/reference/Wire
 
 ### License
 AGPL
