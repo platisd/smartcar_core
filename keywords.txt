@@ -1,10 +1,10 @@
 Smartcar	KEYWORD1
 goForward	KEYWORD2
 goBackward	KEYWORD2
-steerFrontRight	KEYWORD2
-steerFrontLeft	KEYWORD2
-steerBackRight	KEYWORD2
-steerBackLeft	KEYWORD2
+turnFrontRight	KEYWORD2
+turnFrontLeft	KEYWORD2
+turnBackRight	KEYWORD2
+turnBackLeft	KEYWORD2
 rotateClockwise	KEYWORD2
 rotateCounterClockwise	KEYWORD2
 stop	KEYWORD2
