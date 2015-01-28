@@ -1,7 +1,7 @@
 /*
 *	Smartcar.h - A simple library for controlling the smartcar
 *	by providing an interface to the Adafruit Motor library.
-*	Version: 0.2
+*	Version: 0.3
 *	Author: Dimitris Platis (based on the Smartcar project by Team Pegasus)
 */
 #include "Smartcar.h"
@@ -53,8 +53,8 @@ void Smartcar::turnBackLeft(){
 	setRightDirectionAndSpeed(BACKWARD, MAX_SPEED);
 }
 void Smartcar::rotateClockwise(){
-	setLeftDirectionAndSpeed(FORWARD, MAX_SPEED);
-	setRightDirectionAndSpeed(BACKWARD, MAX_SPEED);
+	setLeftDirectionAndSpeed(FORWARD, ROTATION_SPEED);
+	setRightDirectionAndSpeed(BACKWARD, ROTATION_SPEED);
 }
 void Smartcar::rotateClockwise(int degrees){ //TO-DO
 	initializeMagnetometer();
@@ -66,8 +66,8 @@ void Smartcar::rotateClockwise(int degrees){ //TO-DO
 
 
 void Smartcar::rotateCounterClockwise(){
-	setLeftDirectionAndSpeed(BACKWARD, MAX_SPEED);
-	setRightDirectionAndSpeed(FORWARD, MAX_SPEED);
+	setLeftDirectionAndSpeed(BACKWARD, ROTATION_SPEED);
+	setRightDirectionAndSpeed(FORWARD, ROTATION_SPEED);
 }
 void Smartcar::rotateCounterClockwise(int degrees){} //TO-DO
 

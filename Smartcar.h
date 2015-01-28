@@ -1,7 +1,7 @@
 /*
 *	Smartcar.h - A simple library for controlling the smartcar
 *	by providing an interface to the Adafruit Motor library.
-*	Version: 0.2
+*	Version: 0.3
 *	Author: Dimitris Platis (based on the Smartcar project by Team Pegasus)
 */
 #ifndef Smartcar_h
@@ -16,6 +16,7 @@ static const short LOWER_LEFT_MOTOR_PIN = 2;
 static const short UPPER_RIGHT_MOTOR_PIN = 3;
 static const short LOWER_RIGHT_MOTOR_PIN = 4;
 
+static const int ROTATION_SPEED = 200; //Please do not change untill Issue#1 is resolved (see github page)
 static const int MAX_SPEED = 255;
 static const int MIN_SPEED = 0;
 
