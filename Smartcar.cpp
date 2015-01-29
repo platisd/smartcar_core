@@ -1,19 +1,25 @@
 /*
 *	Smartcar.h - A simple library for controlling the smartcar
 *	by providing an interface to the Adafruit Motor library.
-*	Version: 0.3
+*	Version: 0.4
 *	Author: Dimitris Platis (based on the Smartcar project by Team Pegasus)
 */
 #include "Smartcar.h"
 
 volatile unsigned short _pulseCounter = 0;
 
-Smartcar::Smartcar() : motorLeft1(UPPER_LEFT_MOTOR_PIN), motorLeft2(LOWER_LEFT_MOTOR_PIN), motorRight1(UPPER_RIGHT_MOTOR_PIN), motorRight2(LOWER_RIGHT_MOTOR_PIN)
+Smartcar::Smartcar() : motorLeft1(UPPER_LEFT_MOTOR_CHANNEL), motorLeft2(LOWER_LEFT_MOTOR_CHANNEL), motorRight1(UPPER_RIGHT_MOTOR_CHANNEL), motorRight2(LOWER_RIGHT_MOTOR_CHANNEL)
 {
 	setDefaultMotorSpeed(200);
+	setInterruptPin(4);
+}
+
+void Smartcar::begin(){
+	Wire.begin();
+	compass.SetScale(1.3);
+	compass.SetMeasurementMode(Measurement_Continuous);
 	setLeftDirectionAndSpeed(RELEASE, 0);
 	setRightDirectionAndSpeed(RELEASE,0);
-	setInterruptPin(4);
 }
 
 void Smartcar::goForward(){
@@ -56,11 +62,14 @@ void Smartcar::rotateClockwise(){
 	setLeftDirectionAndSpeed(FORWARD, ROTATION_SPEED);
 	setRightDirectionAndSpeed(BACKWARD, ROTATION_SPEED);
 }
-void Smartcar::rotateClockwise(int degrees){ //TO-DO
-	initializeMagnetometer();
-	while ((degrees - getMagnetometerData()) < 2){
-		rotateClockwise();
+void Smartcar::rotateClockwise(int targetDegrees){
+	rotateClockwise();
+	int initialPosition = getMagnetometerDegrees();
+	int compensation = 0;
+	if(initialPosition - targetDegrees < 0){
+		compensation = -360;
 	}
+	rotateDegrees(targetDegrees, initialPosition, compensation);
 	stop();
 }
 
@@ -69,7 +78,16 @@ void Smartcar::rotateCounterClockwise(){
 	setLeftDirectionAndSpeed(BACKWARD, ROTATION_SPEED);
 	setRightDirectionAndSpeed(FORWARD, ROTATION_SPEED);
 }
-void Smartcar::rotateCounterClockwise(int degrees){} //TO-DO
+void Smartcar::rotateCounterClockwise(int targetDegrees){
+	rotateCounterClockwise();
+	int initialPosition = getMagnetometerDegrees();
+	int compensation = 0;
+	if (initialPosition + targetDegrees > 360){
+		compensation = 360;
+	}
+	rotateDegrees(targetDegrees, initialPosition, compensation);
+	stop();
+}
 
 void Smartcar::stop(){
 	setLeftDirectionAndSpeed(RELEASE, 0);
@@ -132,6 +150,40 @@ void Smartcar::resetDistanceTravelled(){
 	_distanceTravelled = 0;
 }
 
-void Smartcar::initializeMagnetometer(){} //TO-DO
+void Smartcar::rotateDegrees(int targetDegrees, int initialPosition, int compensation){
+	targetDegrees = constrain(targetDegrees,1,359);
+	int magnetometerDegrees = getMagnetometerDegrees();
+	delay(200);
+	while ((abs(initialPosition - magnetometerDegrees)< targetDegrees)){
+		delay(20);
+		magnetometerDegrees = getMagnetometerDegrees();
+		if ((compensation > 0) && (magnetometerDegrees<initialPosition)){
+			magnetometerDegrees += compensation;
+		}
+		else if ((compensation < 0) && (magnetometerDegrees>initialPosition)){
+			magnetometerDegrees += compensation;
+		}
+	}
+}
 
-int Smartcar::getMagnetometerData(){} //TO-DO
+/* based on the HMC5883L library's example */
+int Smartcar::getMagnetometerDegrees(){
+	MagnetometerRaw raw = compass.ReadRawAxis();
+	float heading = atan2(raw.YAxis, raw.XAxis);
+	float declinationAngle = 98.32/1000; //for Sweden
+	heading += declinationAngle;
+	if(heading <0) heading += 2*PI;
+	if(heading > 2*PI) heading -= 2*PI;
+	float headingDegrees = heading * 180/M_PI;
+	float adjustedDegrees = 0;
+	if (headingDegrees<=150){ //TO-DO fix with a more accurate formula
+		adjustedDegrees = headingDegrees/1.55;
+	}
+	else if (headingDegrees<=240){
+		adjustedDegrees = headingDegrees -60;
+	}
+	else if (headingDegrees<=360){
+		adjustedDegrees = (headingDegrees -100)/0.72;
+	}
+	return adjustedDegrees;  
+}
