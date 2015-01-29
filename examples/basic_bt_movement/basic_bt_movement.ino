@@ -1,5 +1,7 @@
 #include <AFMotor.h>
 #include <Smartcar.h>
+#include <Wire.h>
+#include <HMC5883L.h>
 #include <SoftwareSerial.h>
 
 SoftwareSerial bluetooth(50,51); // RX, TX
