@@ -17,14 +17,16 @@ The students will provide constant feedback on the API, which will aid in the ex
 - The smartcar hardware platform
 - [Adafruit motor shield library]
 - [Wire library]
+- [HMC5883L library]
 
 ### Documentation
 - [Wiki]
 
-[Adafruit motor shield library]:https://github.com/adafruit/Adafruit-Motor-Shield-library
+[Adafruit motor shield library]:https://github.com/platisd/Adafruit-Motor-Shield-library
 [Wiki]:https://github.com/platisd/smartcar_core/wiki
 [Wire library]:http://arduino.cc/en/reference/Wire
 [DIT524]:http://gul.gu.se/public/courseId/66245/coursePath/46825/ecp/lang-sv/publicPage.do
+[HMC5883L library]:https://github.com/platisd/HMC5883L
 
 ### License
 AGPL
