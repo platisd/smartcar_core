@@ -1,16 +1,15 @@
 #include <AFMotor.h>
 #include <Smartcar.h>
-#include <Wire.h>
-#include <HMC5883L.h>
 #include <SoftwareSerial.h>
+
 
 SoftwareSerial bluetooth(50,51); // RX, TX
 // Only pins: 10, 11, 12, 13,  50, 51, 52, 53,  62, 63, 64, 65, 66, 67, 68, 69 will only work for SoftwareSerial on Arduino Mega!
 Smartcar bob;
 
 void setup() {
-  bluetooth.begin(9600);
   bob.begin();
+  bluetooth.begin(9600);
 }
 
 void loop() {
@@ -33,17 +32,22 @@ void handleInput(){
     case 'b': //go backward
       bob.goBackward();
       break;
-    case 'z': //steer back left
-      bob.steerBackLeft();
+    case 'z': //turn back left
+      bob.turnBackLeft();
       break;
-    case 'x': //steer back right
-      bob.steerBackRight();
+    case 'x': //turn back right
+      bob.turnBackRight();
       break;
-    case 'p': //steer front left
-      bob.steerFrontLeft();
+    case 'p': //turn front left
+      bob.turnFrontLeft();
       break;
-    case 'k': //steer front right
-      bob.steerFrontRight();
+    case 'k': //turn front right
+      bob.turnFrontRight();
+      break;
+    case 'q': //go forward and backward
+      bob.goForward(100);
+      bob.goBackward(50);
+      bob.goForward(1);
       break;
     default: //if you receive something that you don't know, just stop
       bob.stop();
