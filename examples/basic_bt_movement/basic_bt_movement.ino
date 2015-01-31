@@ -1,5 +1,7 @@
 #include <AFMotor.h>
 #include <Smartcar.h>
+#include <Wire.h>
+#include <HMC5883L.h>
 #include <SoftwareSerial.h>
 
 
@@ -43,11 +45,6 @@ void handleInput(){
       break;
     case 'k': //turn front right
       bob.turnFrontRight();
-      break;
-    case 'q': //go forward and backward
-      bob.goForward(100);
-      bob.goBackward(50);
-      bob.goForward(1);
       break;
     default: //if you receive something that you don't know, just stop
       bob.stop();
