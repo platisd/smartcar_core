@@ -12,3 +12,5 @@ setLeftMotorsDirection	KEYWORD2
 setRightMotorsDirection	KEYWORD2
 setLeftMotorsSpeed	KEYWORD2
 setRightMotorsSpeed	KEYWORD2
+setAutomationMotorSpeed	KEYWORD2
+setAutomationRotationSpeed	KEYWORD2
