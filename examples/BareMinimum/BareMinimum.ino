@@ -1,7 +1,6 @@
 #include <AFMotor.h>
 #include <Smartcar.h>
 #include <Wire.h>
-#include <HMC5883L.h>
 
 Smartcar simeon;
 
