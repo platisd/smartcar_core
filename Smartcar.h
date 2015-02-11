@@ -33,6 +33,7 @@ static const int ODOMETER_PIN = 4;
 static const int GYRO_OFFSET = 20;
 static const int GYRO_SAMPLING_RATE = 20;
 static const float GYRO_SENSITIVITY = 0.07;
+static const int GYRO_THRESHOLD = 12; //determined experimentally
 
 static const int CTRL_REG1 = 0x20;
 static const int CTRL_REG2 =  0x21;
@@ -67,7 +68,7 @@ class Smartcar
 		void setRightMotorsDirection(int direction);
 		void setLeftMotorsSpeed(int speed);
 		void setRightMotorsSpeed (int speed);
-		void setAutomationMotorSpeed(int automationSpeed)
+		void setAutomationMotorSpeed(int automationSpeed);
 		void setAutomationRotationSpeed(int rotationSpeed);
 		
 	private:
