@@ -26,25 +26,28 @@ static const int AUTOMATION_MOTOR_SPEED = 85;
 static const int AUTOMATION_ROTATION_SPEED = 85;
 
 /* ====== Odometer (speed encoder) constants ====== */
+#ifndef Smartcar_sensors_h
 static const float PULSES_PER_CENTIMETER = 4; //determined experimentally
-static const int ODOMETER_PIN = 4;
+#endif
+static const int ODOMETER_PIN = 4; //pin 19 on Arduino mega
 
 /* ====== Gyroscope (L3G4200D) constants ====== */
-static const int GYRO_OFFSET = 20;
 static const int GYRO_SAMPLING_RATE = 20;
-static const float GYRO_SENSITIVITY = 0.07;
-static const int GYRO_THRESHOLD = 12; //determined experimentally
+#ifndef Smartcar_sensors_h
+	static const int GYRO_OFFSET = 20;
+	static const float GYRO_SENSITIVITY = 0.07;
+	static const int GYRO_THRESHOLD = 12; //determined experimentally
 
-static const int CTRL_REG1 = 0x20;
-static const int CTRL_REG2 =  0x21;
-static const int CTRL_REG3 = 0x22;
-static const int CTRL_REG4 = 0x23;
-static const int CTRL_REG5 = 0x24;
+	static const int CTRL_REG1 = 0x20;
+	static const int CTRL_REG2 =  0x21;
+	static const int CTRL_REG3 = 0x22;
+	static const int CTRL_REG4 = 0x23;
+	static const int CTRL_REG5 = 0x24;
 
-static const int L3G4200D_Address = 105; //gyroscope I2C address
+	static const int L3G4200D_Address = 105; //gyroscope I2C address
+#endif
 
-
-void updateCounter();
+void updateCounter(); //ISR for the odometer
 
 class Smartcar
 {
