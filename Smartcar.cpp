@@ -6,7 +6,7 @@
 */
 #include "Smartcar.h"
 
-volatile unsigned short _pulseCounter = 0;
+volatile unsigned long _pulseCounter = 0;
 
 
 Smartcar::Smartcar() : motorLeft1(UPPER_LEFT_MOTOR_CHANNEL), motorLeft2(LOWER_LEFT_MOTOR_CHANNEL), motorRight1(UPPER_RIGHT_MOTOR_CHANNEL), motorRight2(LOWER_RIGHT_MOTOR_CHANNEL)
