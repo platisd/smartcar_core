@@ -191,7 +191,8 @@ void Smartcar::angularDisplacement(int targetDegrees){
 		prev = millis();
 		delay(_gyroscopeSamplingRate);
 		gyroValue = getGyroValues();
-		if (abs(_gyroscopeOffset - gyroValue) < GYRO_THRESHOLD){
+		short drift = _gyroscopeOffset - gyroValue;
+		if (abs(drift) < GYRO_THRESHOLD){
 			gyroRate = 0;
 		}else{
 			gyroRate = (gyroValue - _gyroscopeOffset) * _gyroscopeSensitivity;
