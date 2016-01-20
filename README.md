@@ -1,6 +1,9 @@
 # Smartcar Core
 A library that extends the Adafruit Motor Shield library in order to provide some high level functions to the user of a Smartcar. Written by Dimitris Platis and based on the Team Pegasus Smartcar project.
 
+## Notice
+This library is **deprecated**. Please use the [Smartcar shield](https://github.com/platisd/smartcar_shield/) library instead.
+
 ### What
 This library is based on a specific hardware platform (an Arduino based remote controlled car), the "Smartcar" and is developed for educational purposes within the context of an experiment on API evaluation, by Dimitris Platis. During the development of the API, the assumption that the API users are inexperienced and opportunistic was made.
 This is justified by the fact that the students who will use it, have not programmed in an Arduino or another embedded platform before, are not expert programmers and are using the Smartcar platform just because they have to pass their university course.
